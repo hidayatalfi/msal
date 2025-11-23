@@ -73,7 +73,7 @@ export default function CardLetter({
     const url = `/api/letters/generate?${q}`;
     const filename = `${letter.letter_name + " " + employee.name || "surat"}.pdf`;
     try {
-      await downloadViaBlob(url, filename); // tetap di halaman
+      await downloadViaBlob(process.env.NEXT_PUBLIC_APP_URL + url, filename); // tetap di halaman
     } catch (e) {
       console.log("Error from generate: ", e);
     } finally {

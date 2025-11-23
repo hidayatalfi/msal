@@ -66,7 +66,10 @@ export default function CreateLetterPageClient({ user }) {
           // if (preferExternalDownloader) {
           // await downloadViaNavigation(res.url); // IDM-friendly
           // } else {
-          await downloadViaBlob(res.url, filename); // tetap di halaman
+          await downloadViaBlob(
+            process.env.NEXT_PUBLIC_APP_URL + res.url,
+            filename,
+          ); // tetap di halaman
           // }
         } catch (e) {
           console.log("Error from create letter: ", e);
