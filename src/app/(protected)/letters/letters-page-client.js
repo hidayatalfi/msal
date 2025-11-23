@@ -112,7 +112,9 @@ export default function LettersPageClient() {
       });
       if (result.ok) {
         setLetterList((prevDocuments) =>
-          prevDocuments.filter((doc) => doc.unique_id_doc !== idDelete),
+          prevDocuments.filter(
+            (doc) => doc.unique_id_generated_letter !== idDelete,
+          ),
         );
         setSuccess("Berhasil menghapus file");
       } else {
@@ -140,7 +142,7 @@ export default function LettersPageClient() {
           <div className="relative flex w-full items-center justify-between border-b pb-3">
             <div className="relative flex w-32 flex-col">
               <p className="text-xs text-gray-400">Total surat</p>
-              <p className="text-lg">2025</p>
+              <p className="text-lg">{letterList.length}</p>
             </div>
             <Link
               href={"/letters/create"}

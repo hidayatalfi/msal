@@ -1,9 +1,13 @@
-import { requireAuth } from "@/lib/auth/server-auth";
+import { getServerAuth } from "@/lib/auth/server-auth";
+import { redirect } from "next/navigation";
 import ProtectedLayoutClient from "./protected-layout-client";
 
 export default async function ProtectedLayout({ children }) {
-  // Server-side auth check - protect all children
-  const user = await requireAuth();
+  const { authenticated } = await getServerAuth();
 
-  return <ProtectedLayoutClient user={user}>{children}</ProtectedLayoutClient>;
+  if (!authenticated) {
+    redirect("/login");
+  }
+
+  return <ProtectedLayoutClient>{children}</ProtectedLayoutClient>;
 }

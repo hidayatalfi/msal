@@ -2,14 +2,23 @@
 import Link from "next/link";
 import React from "react";
 import Button from "./Button";
+import { useAuth } from "@/lib/hooks/useAuth";
 
 export default function Navigation({ onClick = () => {} }) {
+  const { user } = useAuth();
+  const userRoles = Array.isArray(user?.roles) ? user.roles : [];
   const menu = [
-    { name: "Home", link: "/home" },
-    { name: "Surat", link: "/letters" },
-    { name: "Dokumen", link: "/documents" },
-    { name: "Akun", link: "/account" },
+    { name: "Home", link: "/home", role: "" },
+    { name: "Surat", link: "/letters", role: "" },
+    { name: "Dokumen", link: "/documents", role: "" },
+    { name: "Akun", link: "/account", role: "" },
+    { name: "Users", link: "/users", role: "admin" },
   ];
+
+  const visibleMenu = menu.filter((item) => {
+    if (!item.role) return true; // role kosong = tampil ke semua user login
+    return userRoles.includes(item.role);
+  });
   return (
     <nav className="fixed top-6 left-1/2 z-50 -translate-x-1/2">
       <div className="flex items-center gap-6 rounded-2xl border border-white/30 bg-white/20 py-3 pr-8 pl-3 shadow-[0_8px_24px_rgba(0,0,0,0.08)] backdrop-blur-xl">
@@ -22,7 +31,7 @@ export default function Navigation({ onClick = () => {} }) {
           </div>
         </div>
 
-        {menu.map((item, index) => (
+        {visibleMenu.map((item, index) => (
           <Link
             href={item.link}
             key={index}

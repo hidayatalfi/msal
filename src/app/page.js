@@ -1,6 +1,8 @@
 import ButtonLink from "@/components/ButtonLink";
+import { getServerAuth } from "@/lib/auth/server-auth";
 
-export default function Home() {
+export default async function Home() {
+  const { authenticated } = await getServerAuth();
   return (
     <div className="animate-aurora relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-linear-to-br from-blue-100 via-purple-100 to-orange-100">
       <div className="group animate-popIn relative z-20 flex h-22 w-22 items-center justify-center rounded-[28px] border border-white/60 bg-white/40 p-5 shadow-[0_8px_60px_rgba(140,165,255,0.3)] backdrop-blur-2xl transition-transform duration-500 ease-out hover:scale-[1.01]">
@@ -19,7 +21,11 @@ export default function Home() {
           Manage your documents, collaborate with your team, and stay organized
           seamlessly.
         </p>
-        <ButtonLink className={"mt-5"} text="Sign in" />
+        <ButtonLink
+          className={"mt-5"}
+          text={authenticated ? "Home" : "Sign in"}
+          link={authenticated ? "/home" : "/login"}
+        />
       </div>
     </div>
   );

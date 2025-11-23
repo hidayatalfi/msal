@@ -5,7 +5,6 @@ import emoji from "../../../public/emoji.png";
 import emoji_hands from "../../../public/emoji-hands.png";
 import Link from "next/link";
 import Button from "@/components/Button";
-import { useAuth } from "@/lib/hooks/useAuth";
 import { useRouter, useSearchParams } from "next/navigation";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
@@ -16,18 +15,9 @@ export default function LoginPageClient() {
   const [errorLogin, setErrorLogin] = useState(null);
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const { login, isAuthenticated, isLoading: authLoading } = useAuth();
   const router = useRouter();
   const searchParams = useSearchParams();
-
-  const redirectUrl = searchParams.get("redirect") || "/home";
-
-  // Redirect if already authenticated
-  useEffect(() => {
-    if (isAuthenticated && !authLoading) {
-      router.push(redirectUrl);
-    }
-  }, [isAuthenticated, authLoading, router, redirectUrl]);
+  const redirectParam = searchParams.get("redirect") || "/home";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -35,16 +25,19 @@ export default function LoginPageClient() {
     setLoading(true);
 
     try {
-      const result = await login({
-        username: username.trim(),
-        password: code.trim(),
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password: code }),
       });
-      if (result.success) {
-        router.push(redirectUrl);
-        router.refresh();
-      } else {
-        setErrorLogin(result.error || "Login gagal");
+
+      const json = await res.json();
+      if (!res.ok) {
+        setErrorLogin(json.error || "Login gagal");
+        setLoading(false);
+        return;
       }
+      router.replace(redirectParam);
     } catch (err) {
       setErrorLogin("Terjadi kesalahan. Silakan coba lagi.");
     } finally {
@@ -157,21 +150,23 @@ export default function LoginPageClient() {
             >
               Password
             </label>
-            <input
-              id="password"
-              type={showPassword ? "text" : "password"}
-              value={code}
-              onChange={(e) => setCode(e.target.value)}
-              placeholder="Masukkan Password"
-              disabled={loading}
-              className="w-full rounded-xl border border-gray-300 bg-white/30 py-2 pr-10 pl-3 text-center text-base text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-blue-300 focus:outline-none disabled:cursor-no-drop disabled:bg-gray-300/20"
-            />
-            <span
-              onClick={() => setShowPassword(!showPassword)}
-              className="absolute top-1/2 right-3 cursor-pointer p-1 text-slate-400"
-            >
-              {!showPassword ? <FaEye /> : <FaEyeSlash />}
-            </span>
+            <div className="relative w-full">
+              <input
+                id="password"
+                type={showPassword ? "text" : "password"}
+                value={code}
+                onChange={(e) => setCode(e.target.value)}
+                placeholder="Masukkan Password"
+                disabled={loading}
+                className="w-full rounded-xl border border-gray-300 bg-white/30 py-2 pr-8 pl-3 text-center text-base text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-blue-300 focus:outline-none disabled:cursor-no-drop disabled:bg-gray-300/20"
+              />
+              <span
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer text-slate-400"
+              >
+                {!showPassword ? <FaEye /> : <FaEyeSlash />}
+              </span>
+            </div>
           </div>
           <p className="mb-1 text-center text-sm text-red-500">{errorLogin}</p>
           {loading ? (

@@ -1,17 +1,37 @@
+// src/app/api/me/route.js
 import { NextResponse } from "next/server";
-import { AuthService } from "@/lib/auth/auth-service";
+import { cookies } from "next/headers";
+import { verifyAuthToken } from "@/lib/auth/jwt-service";
 
 export async function GET() {
   try {
-    const user = await AuthService.getCurrentUser();
+    const cookieStore = await cookies();
+    const token = cookieStore.get("auth_token")?.value;
 
-    if (!user) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    if (!token) {
+      return NextResponse.json({ authenticated: false }, { status: 200 });
     }
 
-    return NextResponse.json({ user });
-  } catch (error) {
-    console.error("Get user error:", error);
-    return NextResponse.json({ error: "Terjadi kesalahan" }, { status: 500 });
+    const payload = verifyAuthToken(token);
+    if (!payload) {
+      return NextResponse.json({ authenticated: false }, { status: 200 });
+    }
+
+    return NextResponse.json(
+      {
+        authenticated: true,
+        user: {
+          id: payload.sub,
+          username: payload.username,
+          fullName: payload.fullName,
+          uniqueIdUser: payload.uniqueId,
+          roles: payload.roles || [],
+          permissions: payload.permissions || [],
+        },
+      },
+      { status: 200 },
+    );
+  } catch {
+    return NextResponse.json({ authenticated: false }, { status: 200 });
   }
 }

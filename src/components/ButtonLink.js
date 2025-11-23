@@ -5,10 +5,11 @@ export default function ButtonLink({
   className,
   width = "w-fit",
   padding = "px-8 py-2",
+  link = "/",
 }) {
   return (
     <Link
-      href="/login"
+      href={link}
       className={`${className} ${width} ${padding} group relative flex cursor-pointer items-center justify-center overflow-hidden rounded-xl bg-linear-to-r from-blue-400 to-purple-400 text-lg font-semibold text-white shadow-[0_8px_20px_rgba(0,0,0,0.1)] transition-transform active:scale-95`}
     >
       <span className="relative z-10">{text}</span>

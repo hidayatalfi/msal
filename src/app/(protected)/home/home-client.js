@@ -3,7 +3,7 @@
 import DocumentsAnalytics from "./DocumentsAnalytics";
 import LettersAnalytics from "./LettersAnalytics";
 
-export default function HomepageClient({ user }) {
+export default function HomepageClient() {
   return (
     <div className="relative flex h-full min-h-screen w-full flex-col space-y-3 px-8 pt-32">
       <div className="relative flex w-full flex-col border-b border-slate-400 pb-8">

@@ -46,7 +46,7 @@ export default function NotFound() {
             href={"/"}
             className="relative w-full cursor-pointer rounded-xl bg-linear-to-r from-blue-400 to-purple-400 px-12 py-3 font-semibold text-white transition hover:opacity-90"
           >
-            Home
+            Homepage
           </Link>
         </div>
       </div>

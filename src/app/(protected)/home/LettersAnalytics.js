@@ -40,10 +40,6 @@ export default function LettersAnalytics() {
     fetchCountByCompany();
   }, []);
 
-  useEffect(() => {
-    console.log(dataByCompany, "---Data");
-  }, [dataByCompany]);
-
   const colorsByType = [
     "rgba(96,165,250,0.9)", // blue-400
     "rgba(167,139,250,0.9)", // purple-400
