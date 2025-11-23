@@ -13,7 +13,7 @@ export async function GET(req) {
   const logoRes = await fetch(
     new URL(
       "/logos/msal.png",
-      process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000",
+      process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000",
     ),
   );
   const logoBytes = new Uint8Array(await logoRes.arrayBuffer());

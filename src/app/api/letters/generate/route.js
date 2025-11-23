@@ -19,7 +19,7 @@ export async function GET(req) {
     logoBytes = new Uint8Array(await res.arrayBuffer());
   } else {
     // fallback: ambil dari /logo.png atau path publik lain
-    const base = process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000";
+    const base = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
     const res = await fetch(new URL(surat.logo || "/logos/msal.png", base));
     logoBytes = new Uint8Array(await res.arrayBuffer());
   }
