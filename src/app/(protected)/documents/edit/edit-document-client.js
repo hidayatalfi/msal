@@ -270,7 +270,7 @@ export default function EditDocumentClientPage({ user, id }) {
   if (loading) return <Loading />;
   return (
     <>
-      <div className="relative flex w-full justify-center space-x-5 pt-28">
+      <div className="relative flex w-full justify-center space-x-5 pt-28 pb-5">
         <div className="relative h-full w-2/5 select-none">
           <label
             htmlFor="file-upload"

@@ -218,7 +218,7 @@ export default function AddDocumentClientPage({ user }) {
 
   return (
     <>
-      <div className="relative flex h-[97vh] w-full items-center justify-center space-x-5 px-8 pt-32">
+      <div className="relative flex h-[97vh] w-full items-center justify-center space-x-5 px-8 pt-32 pb-5">
         <div className="relative h-full w-2/5 select-none">
           <label
             htmlFor="file-upload"

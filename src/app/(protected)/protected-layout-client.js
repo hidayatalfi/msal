@@ -14,7 +14,7 @@ export default function ProtectedLayoutClient({ children }) {
   return (
     <>
       <Navigation onClick={handleLogout} />
-      <main className="relative flex min-h-screen overflow-hidden bg-linear-to-br from-blue-100 via-purple-100 to-orange-100 pb-5">
+      <main className="relative flex min-h-screen bg-linear-to-br from-blue-100 via-purple-100 to-orange-100">
         {children}
       </main>
       {loading && <Loading />}

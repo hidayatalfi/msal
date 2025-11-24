@@ -130,7 +130,7 @@ export default function LettersPageClient() {
   };
   return (
     <>
-      <div className="relative flex w-full flex-col items-center pt-32">
+      <div className="relative flex w-full flex-col items-center pt-32 pb-5">
         <input
           type="search"
           value={keyword}

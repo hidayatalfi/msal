@@ -90,7 +90,7 @@ export default function CreateLetterPageClient({ user }) {
   };
   return (
     <>
-      <div className="relative flex w-full space-x-5 px-5 pt-30">
+      <div className="relative flex w-full space-x-5 px-5 pt-30 pb-5">
         <div className="relative flex h-fit w-[58%] flex-col space-y-3 rounded-xl bg-white/10 px-5 py-3 pb-3 text-black shadow-[0_8px_24px_rgba(0,0,0,0.08)] backdrop-blur-xl">
           <FormAddLetter
             setErrorNotif={setErrorNotif}

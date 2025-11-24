@@ -140,7 +140,7 @@ export default function LoginPageClient() {
               onChange={(e) => setUsername(e.target.value)}
               placeholder="Masukkan username"
               disabled={loading}
-              className="w-full rounded-xl border border-gray-300 bg-white/30 px-3 py-2 text-center text-base text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-blue-300 focus:outline-none disabled:cursor-no-drop disabled:bg-gray-300/20"
+              className="w-full rounded-xl border border-gray-300 bg-white/30 px-3 py-2 text-base text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-blue-300 focus:outline-none disabled:cursor-no-drop disabled:bg-gray-300/20"
             />
           </div>
           <div className="relative flex w-full flex-col items-start">
@@ -158,7 +158,7 @@ export default function LoginPageClient() {
                 onChange={(e) => setCode(e.target.value)}
                 placeholder="Masukkan Password"
                 disabled={loading}
-                className="w-full rounded-xl border border-gray-300 bg-white/30 py-2 pr-8 pl-3 text-center text-base text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-blue-300 focus:outline-none disabled:cursor-no-drop disabled:bg-gray-300/20"
+                className="w-full rounded-xl border border-gray-300 bg-white/30 py-2 pr-8 pl-3 text-base text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-blue-300 focus:outline-none disabled:cursor-no-drop disabled:bg-gray-300/20"
               />
               <span
                 onClick={() => setShowPassword(!showPassword)}
