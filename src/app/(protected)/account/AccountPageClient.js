@@ -29,10 +29,10 @@ export default function AccountPageClient({ user }) {
           (Array.isArray(value) && value.length === 0)
         ) {
           console.log(`Key '${key}' memiliki nilai kosong.`);
-          return false; // Jika ada nilai yang kosong, return false
+          return false;
         }
       }
-      return true; // Semua nilai ada isinya
+      return true;
     };
     const newUsername = { new_username: username };
     if (isValidInput(newUsername)) {
@@ -50,10 +50,10 @@ export default function AccountPageClient({ user }) {
         if (response.ok) {
           setSuccess("Berhasil update username");
           setModeChangeUsername(false);
+        } else {
+          const res = await response.json();
+          setError(res.message);
         }
-
-        const res = await response.json();
-        setError(res.message);
       } catch (error) {
         console.log("Error update username", error);
       } finally {
@@ -101,10 +101,10 @@ export default function AccountPageClient({ user }) {
           setModeChangePassword(false);
           setOldPassword("");
           setNewPassword("");
+        } else {
+          const res = await response.json();
+          setError(res.message);
         }
-
-        const res = await response.json();
-        setError(res.message);
       } catch (error) {
         console.log("Error update kata sandi", error);
       } finally {

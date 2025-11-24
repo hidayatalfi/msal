@@ -9,7 +9,7 @@ export default function Navigation({ onClick = () => {} }) {
   const userRoles = Array.isArray(user?.roles) ? user.roles : [];
   const menu = [
     { name: "Home", link: "/home", role: "" },
-    { name: "Surat", link: "/letters", role: "" },
+    { name: "Surat Keputusan", link: "/letters", role: "" },
     { name: "Dokumen", link: "/documents", role: "" },
     { name: "Akun", link: "/account", role: "" },
     { name: "Users", link: "/users", role: "admin" },
@@ -35,7 +35,7 @@ export default function Navigation({ onClick = () => {} }) {
           <Link
             href={item.link}
             key={index}
-            className="group relative px-2 text-base font-medium text-gray-700 transition hover:text-gray-900"
+            className="group relative px-2 text-base font-medium text-nowrap text-gray-700 transition hover:text-gray-900"
           >
             {item.name}
 

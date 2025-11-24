@@ -65,10 +65,10 @@ export default function FormAddUser({ setLoading, setError }) {
         if (response.ok) {
           router.replace("/users");
           setError(false);
+        } else {
+          const res = await response.json();
+          setError(res.message);
         }
-
-        const res = await response.json();
-        setError(res.message);
       } catch (error) {
         setError("Error: ", error);
       } finally {
